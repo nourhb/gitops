@@ -19,6 +19,7 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
+        runAsUser: {{ .Values.podSecurityContext.runAsUser }}
         seccompProfile:
           type: RuntimeDefault
       {{- with .Values.imagePullSecrets }}
@@ -32,6 +33,7 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
+            runAsUser: {{ .Values.podSecurityContext.runAsUser }}
             readOnlyRootFilesystem: true
           env:
             {{- range .Values.env }}
