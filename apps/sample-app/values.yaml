@@ -1,0 +1,21 @@
+image:
+  repository: harbor.example.com/project/image
+  tag: ""
+  digest: sha256:replace-with-real-image-digest
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+env: []
+
+ingress:
+  enabled: false
+  className: ""
+  hosts: []
+  tls: []
+
