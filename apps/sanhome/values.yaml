@@ -1,4 +1,4 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "7"
+  tag: "8"
   digest: ""
