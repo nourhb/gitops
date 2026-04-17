@@ -1,7 +1,10 @@
 image:
-  repository: harbor.example.com/project/image
-  tag: ""
-  digest: sha256:replace-with-real-image-digest
+  repository: gcr.io/google-samples/hello-app
+  tag: "1.0"
+  digest: ""
+
+# Set to pull from private registries, e.g. [{ name: harbor-regcred }]
+imagePullSecrets: []
 
 resources:
   limits:
