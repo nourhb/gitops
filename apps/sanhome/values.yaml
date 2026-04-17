@@ -1,23 +1,18 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "latest"
+  tag: "14"
   digest: ""
-
 imagePullSecrets: []
-
 podSecurityContext:
   runAsUser: 1000
-
 resources:
   limits:
-    cpu: "500m"
-    memory: "512Mi"
+    cpu: 500m
+    memory: 512Mi
   requests:
-    cpu: "100m"
-    memory: "128Mi"
-
+    cpu: 100m
+    memory: 128Mi
 env: []
-
 ingress:
   enabled: false
   className: ""
