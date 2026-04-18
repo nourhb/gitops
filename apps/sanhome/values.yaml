@@ -3,12 +3,16 @@ image:
   tag: "latest"
   digest: ""
 
-# Required for private Harbor (kubectl create secret docker-registry harbor-regcred … -n devsecops-paas)
+# Required for private Harbor (see paas/scripts/ensure_harbor_pull_secret_ssh.py + EXT_ENDPOINT)
 imagePullSecrets:
   - name: harbor-regcred
 
+# hello-app (used until Jenkins builds real sanhome) listens on 8080; align Service targetPort.
+service:
+  targetPort: 8080
+
 podSecurityContext:
-  runAsUser: 1000
+  runAsUser: 65532
 
 resources:
   limits:
