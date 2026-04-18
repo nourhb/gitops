@@ -3,7 +3,9 @@ image:
   tag: "latest"
   digest: ""
 
-imagePullSecrets: []
+# Required for private Harbor (kubectl create secret docker-registry harbor-regcred … -n devsecops-paas)
+imagePullSecrets:
+  - name: harbor-regcred
 
 podSecurityContext:
   runAsUser: 1000
