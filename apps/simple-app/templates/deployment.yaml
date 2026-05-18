@@ -18,7 +18,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         seccompProfile:
           type: RuntimeDefault
       imagePullSecrets:
@@ -33,7 +33,7 @@ spec:
               protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
-            runAsNonRoot: true
+            runAsNonRoot: false
             readOnlyRootFilesystem: false
           env:
             {{- range .Values.env }}
