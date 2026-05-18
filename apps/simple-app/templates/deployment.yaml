@@ -27,10 +27,14 @@ spec:
         - name: {{ include "simple-app.name" . }}
           image: "{{ .Values.image.repository }}{{- if .Values.image.digest }}@{{ .Values.image.digest }}{{- else if .Values.image.tag }}:{{ .Values.image.tag }}{{- end }}"
           imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
           env:
             {{- range .Values.env }}
             - name: {{ .name }}
