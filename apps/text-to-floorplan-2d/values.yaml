@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
-  tag: "192"
+  tag: "201"
   pullPolicy: IfNotPresent
   digest: ""
 imagePullSecrets:
