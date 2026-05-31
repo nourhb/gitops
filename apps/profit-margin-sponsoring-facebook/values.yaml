@@ -15,3 +15,11 @@ ingress:
   hosts:
   - host: profit-margin-sponsoring-facebook.192.168.56.129.nip.io
   tls: []
+resources:
+  limits:
+    cpu: 500m
+    memory: 768Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+env: []
