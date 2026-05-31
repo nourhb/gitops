@@ -1,14 +1,12 @@
 image:
   repository: 192.168.56.129:30002/paas/profit-margin-sponsoring-facebook
-  tag: "189"
+  tag: '189'
   pullPolicy: IfNotPresent
   digest: ''
 imagePullSecrets:
 - name: harbor-regcred
 service:
   targetPort: 3000
-nodeSelector:
-  kubernetes.io/hostname: master
 ingress:
   enabled: true
   className: traefik
