@@ -1,11 +1,11 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "127"
+  tag: "136"
   digest: ""
 imagePullSecrets:
   - name: harbor-regcred
 service:
-  targetPort: 8080
+  targetPort: 3000
 podSecurityContext:
   runAsUser: 65532
 resources:
@@ -22,3 +22,5 @@ ingress:
   hosts:
     - host: sanhome.192.168.56.129.nip.io
   tls: []
+nodeSelector:
+  kubernetes.io/hostname: master
