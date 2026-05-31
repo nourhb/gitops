@@ -1,0 +1,22 @@
+image:
+  repository: 192.168.56.129:30002/paas/dockerized-nextjs
+  tag: "195"
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: harbor-regcred
+service:
+  targetPort: 3000
+resources:
+  limits:
+    cpu: 500m
+    memory: 768Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+env: []
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: dockerized-nextjs.192.168.56.129.nip.io
+  tls: []
