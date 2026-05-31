@@ -1,17 +1,17 @@
 image:
   repository: 192.168.56.129:30002/paas/profit-margin-sponsoring-facebook
-  tag: "189"
+  tag: '189'
   pullPolicy: IfNotPresent
-  digest: ""
+  digest: ''
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 nodeSelector:
   kubernetes.io/hostname: master
 ingress:
   enabled: true
-  className: "traefik             # if Traefik serves :30659"
+  className: traefik
   hosts:
-    - host: profit-margin-sponsoring-facebook.192.168.56.129.nip.io
+  - host: profit-margin-sponsoring-facebook.192.168.56.129.nip.io
   tls: []

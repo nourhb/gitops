@@ -1,3 +1,11 @@
 image:
   repository: 192.168.56.129:30002/paas/food-delivery-devsecops
-  tag: "4"
+  tag: '4'
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+  - host: Food-Delivery-DevSecOps.192.168.56.129.nip.io
+  tls: []
+imagePullSecrets:
+- name: harbor-regcred

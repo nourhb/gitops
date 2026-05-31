@@ -1,9 +1,9 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "188"
-  digest: ""
+  tag: '188'
+  digest: ''
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 podSecurityContext:
@@ -18,9 +18,9 @@ resources:
 env: []
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   hosts:
-    - host: sanhome.192.168.56.129.nip.io
+  - host: sanhome.192.168.56.129.nip.io
   tls: []
 nodeSelector:
   kubernetes.io/hostname: master
