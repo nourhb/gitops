@@ -1,0 +1,16 @@
+image:
+  repository: 192.168.56.129:30002/paas/tutorial-react-docker
+  tag: "137"
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: harbor-regcred
+service:
+  targetPort: 3000
+nodeSelector:
+  kubernetes.io/hostname: master
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: tutorial-react-docker.192.168.56.129.nip.io
+  tls: []
