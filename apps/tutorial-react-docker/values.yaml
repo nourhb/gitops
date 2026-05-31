@@ -2,6 +2,7 @@ image:
   repository: 192.168.56.129:30002/paas/tutorial-react-docker
   tag: "137"
   pullPolicy: IfNotPresent
+  digest: ""
 imagePullSecrets:
   - name: harbor-regcred
 service:
