@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/profit-margin-sponsoring-facebook
-  tag: "235"
+  tag: "240"
   pullPolicy: IfNotPresent
   digest: ""
 imagePullSecrets:
