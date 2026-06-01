@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "simple-app.fullname" . }}
+  name: {{ include "profit-margin-sponsoring-facebook.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "simple-app.name" . }}
+    app.kubernetes.io/name: {{ include "profit-margin-sponsoring-facebook.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: {{ include "simple-app.name" . }}
+    app.kubernetes.io/name: {{ include "profit-margin-sponsoring-facebook.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     {{- if eq (.Values.deploymentStrategy | default "Rolling") "BlueGreen" }}
     paas.io/slot: {{ .Values.activeSlot | default "blue" }}

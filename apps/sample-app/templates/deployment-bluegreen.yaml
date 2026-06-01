@@ -5,22 +5,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "simple-app.fullname" $root }}-{{ $slot }}
+  name: {{ include "sample-app.fullname" $root }}-{{ $slot }}
   labels:
-    app.kubernetes.io/name: {{ include "simple-app.name" $root }}
+    app.kubernetes.io/name: {{ include "sample-app.name" $root }}
     app.kubernetes.io/instance: {{ $root.Release.Name }}
     paas.io/slot: {{ $slot }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "simple-app.name" $root }}
+      app.kubernetes.io/name: {{ include "sample-app.name" $root }}
       app.kubernetes.io/instance: {{ $root.Release.Name }}
       paas.io/slot: {{ $slot }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "simple-app.name" $root }}
+        app.kubernetes.io/name: {{ include "sample-app.name" $root }}
         app.kubernetes.io/instance: {{ $root.Release.Name }}
         paas.io/slot: {{ $slot }}
     spec:
@@ -35,7 +35,7 @@ spec:
       securityContext:
         runAsNonRoot: false
       containers:
-        - name: {{ include "simple-app.name" $root }}
+        - name: {{ include "sample-app.name" $root }}
           {{- $slotImg := index $root.Values $slot | default dict }}
           {{- $slotImage := $slotImg.image | default dict }}
           {{- $repo := $slotImage.repository | default $root.Values.image.repository }}
