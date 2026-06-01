@@ -50,3 +50,5 @@ ingress:
   hosts:
   - host: sanhome.192.168.56.129.nip.io
   tls: []
+deploymentStrategy: BlueGreen
+activeSlot: blue
