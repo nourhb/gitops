@@ -1,6 +1,6 @@
 apiVersion: v2
 name: tutorial-react-docker
-description: DevSecOps PaaS pipeline test application
+description: tutorial-react-docker workload (PaaS / Jenkins deploy)
 type: application
 version: 0.1.0
 appVersion: "1.0.0"
