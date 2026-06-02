@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "283"
+  tag: "287"
   digest: ""
 imagePullSecrets:
   - name: harbor-regcred
