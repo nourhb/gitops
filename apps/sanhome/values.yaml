@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: '323'
+  tag: NEW_BUILD_NUMBER
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
