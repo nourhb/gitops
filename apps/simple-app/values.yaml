@@ -32,4 +32,4 @@ green:
     repository: 192.168.56.129:30002/paas/simple-app
     tag: "324"
     digest: ""
-activeSlot: green
+activeSlot: blue
