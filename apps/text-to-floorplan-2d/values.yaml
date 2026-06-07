@@ -1,8 +1,8 @@
 image:
   repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
   tag: "279"
-  pullPolicy: IfNotPresent
   digest: ""
+  pullPolicy: IfNotPresent
 imagePullSecrets:
   - name: harbor-regcred
 service:
@@ -21,3 +21,15 @@ ingress:
   hosts:
     - host: text-to-floorplan-2d.192.168.56.129.nip.io
   tls: []
+deploymentStrategy: BlueGreen
+blue:
+  image:
+    repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
+    tag: "279"
+    digest: ""
+green:
+  image:
+    repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
+    tag: "279"
+    digest: ""
+activeSlot: blue
