@@ -21,3 +21,15 @@ resources:
 env: []
 service:
   targetPort: 3000
+deploymentStrategy: BlueGreen
+blue:
+  image:
+    repository: 192.168.56.129:30002/paas/simple-app
+    tag: "245"
+    digest: ""
+green:
+  image:
+    repository: 192.168.56.129:30002/paas/simple-app
+    tag: "324"
+    digest: ""
+activeSlot: blue
