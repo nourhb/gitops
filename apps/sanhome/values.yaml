@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: '331'
+  tag: '332'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -56,10 +56,10 @@ activeSlot: green
 blue:
   image:
     repository: 192.168.56.129:30002/paas/sanhome
-    tag: '331'
+    tag: '332'
     digest: ''
 green:
   image:
     repository: 192.168.56.129:30002/paas/sanhome
-    tag: '331'
+    tag: '332'
     digest: ''
