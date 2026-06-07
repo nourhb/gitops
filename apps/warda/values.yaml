@@ -31,5 +31,5 @@ blue:
 green:
   image:
     repository: 192.168.56.129:30002/paas/warda
-    tag: "317"
+    tag: "327"
     digest: ""
