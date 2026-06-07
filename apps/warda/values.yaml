@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/warda
-  tag: "317"
+  tag: "327"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -16,7 +16,7 @@ resources:
     memory: 256Mi
 env: []
 deploymentStrategy: BlueGreen
-activeSlot: blue
+activeSlot: green
 ingress:
   enabled: true
   className: traefik
