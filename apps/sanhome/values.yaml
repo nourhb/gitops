@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: REAL_BUILD
+  tag: '323'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -56,10 +56,10 @@ activeSlot: green
 blue:
   image:
     repository: 192.168.56.129:30002/paas/sanhome
-    tag: REAL_BUILD
+    tag: '323'
     digest: ''
 green:
   image:
     repository: 192.168.56.129:30002/paas/sanhome
-    tag: REAL_BUILD
+    tag: '323'
     digest: ''
