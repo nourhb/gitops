@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/warda
-  tag: '328'
+  tag: '329'
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: harbor-regcred
@@ -25,10 +25,10 @@ ingress:
 blue:
   image:
     repository: 192.168.56.129:30002/paas/warda
-    tag: '328'
+    tag: '329'
     digest: ''
 green:
   image:
     repository: 192.168.56.129:30002/paas/warda
-    tag: '328'
+    tag: '329'
     digest: ''
