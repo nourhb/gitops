@@ -1,10 +1,9 @@
 image:
   repository: 192.168.56.129:30002/paas/warda
-  tag: "327"
-  digest: ""
+  tag: '328'
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 resources:
@@ -21,15 +20,15 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: warda.192.168.56.129.nip.io
+  - host: warda.192.168.56.129.nip.io
   tls: []
 blue:
   image:
     repository: 192.168.56.129:30002/paas/warda
-    tag: "317"
-    digest: ""
+    tag: '328'
+    digest: ''
 green:
   image:
     repository: 192.168.56.129:30002/paas/warda
-    tag: "327"
-    digest: ""
+    tag: '328'
+    digest: ''
