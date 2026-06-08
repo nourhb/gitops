@@ -30,6 +30,6 @@ blue:
 green:
   image:
     repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
-    tag: "279"
+    tag: "337"
     digest: ""
 activeSlot: blue
