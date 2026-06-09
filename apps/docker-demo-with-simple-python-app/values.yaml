@@ -1,0 +1,35 @@
+image:
+  repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
+  tag: "343"
+  digest: ""
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: harbor-regcred
+service:
+  targetPort: 8000
+resources:
+  limits:
+    cpu: 500m
+    memory: 768Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+env: []
+deploymentStrategy: BlueGreen
+activeSlot: blue
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: docker-demo-with-simple-python-app.192.168.56.129.nip.io
+  tls: []
+blue:
+  image:
+    repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
+    tag: "343"
+    digest: ""
+green:
+  image:
+    repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
+    tag: "343"
+    digest: ""
