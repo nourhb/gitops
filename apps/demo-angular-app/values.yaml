@@ -1,0 +1,35 @@
+image:
+  repository: 192.168.56.129:30002/paas/demo-angular-app
+  tag: "360"
+  digest: ""
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: harbor-regcred
+service:
+  targetPort: 3000
+resources:
+  limits:
+    cpu: 500m
+    memory: 768Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+env: []
+deploymentStrategy: BlueGreen
+activeSlot: blue
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: demo-angular-app.192.168.56.129.nip.io
+  tls: []
+blue:
+  image:
+    repository: 192.168.56.129:30002/paas/demo-angular-app
+    tag: "360"
+    digest: ""
+green:
+  image:
+    repository: 192.168.56.129:30002/paas/demo-angular-app
+    tag: "360"
+    digest: ""
