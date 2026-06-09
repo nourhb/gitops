@@ -31,5 +31,5 @@ blue:
 green:
   image:
     repository: 192.168.56.129:30002/paas/angular-docker
-    tag: "365"
+    tag: "371"
     digest: ""
