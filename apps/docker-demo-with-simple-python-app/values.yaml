@@ -31,5 +31,5 @@ blue:
 green:
   image:
     repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
-    tag: "347"
+    tag: "352"
     digest: ""
