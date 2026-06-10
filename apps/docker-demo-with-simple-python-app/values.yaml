@@ -9,11 +9,11 @@ service:
   targetPort: 8000
 resources:
   limits:
-    cpu: 500m
-    memory: 768Mi
-  requests:
-    cpu: 100m
+    cpu: 200m
     memory: 256Mi
+  requests:
+    cpu: 25m
+    memory: 64Mi
 env: []
 deploymentStrategy: Rolling
 ingress:
