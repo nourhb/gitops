@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/angular-docker
-  tag: "393"
+  tag: "398"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
