@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: "395"
+  tag: "397"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
