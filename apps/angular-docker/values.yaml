@@ -1,12 +1,12 @@
 image:
   repository: 192.168.56.129:30002/paas/angular-docker
-  tag: "365"
+  tag: "376"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
   - name: harbor-regcred
 service:
-  targetPort: 3000
+  targetPort: 80
 resources:
   limits:
     cpu: 500m
@@ -15,21 +15,10 @@ resources:
     cpu: 100m
     memory: 256Mi
 env: []
-deploymentStrategy: BlueGreen
-activeSlot: blue
+deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
     - host: angular-docker.192.168.56.129.nip.io
   tls: []
-blue:
-  image:
-    repository: 192.168.56.129:30002/paas/angular-docker
-    tag: "365"
-    digest: ""
-green:
-  image:
-    repository: 192.168.56.129:30002/paas/angular-docker
-    tag: "371"
-    digest: ""
