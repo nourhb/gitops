@@ -1,10 +1,10 @@
 image:
   repository: 192.168.56.129:30002/paas/sanhome
-  tag: '332'
-  digest: ''
+  tag: "395"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
   targetPort: 3000
 podSecurityContext:
@@ -17,38 +17,53 @@ resources:
     cpu: 100m
     memory: 128Mi
 env:
-- name: NEXT_PUBLIC_FIREBASE_API_KEY
-  value: AIzaSyAkl7Dtii1jap9DwpVg-ObTkcJMqdFbLdM
-- name: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-  value: sanhome-e392d.firebaseapp.com
-- name: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-  value: sanhome-e392d
-- name: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-  value: sanhome-e392d.appspot.com
-- name: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-  value: '677679364149'
-- name: NEXT_PUBLIC_FIREBASE_APP_ID
-  value: 1:677679364149:web:73812d8ca059214338997c
-- name: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
-  value: G-JBG8TDGVVQ
-- name: EMAIL_USER
-  value: nourhb58@gmail.com
-- name: EMAIL_PASS
-  value: kpxs lxdl vcqz yyha
-- name: CLOUDINARY_CLOUD_NAME
-  value: '"dbknnbsua"'
-- name: CLOUDINARY_API_KEY
-  value: '"631469974713699"'
-- name: CLOUDINARY_API_SECRET
-  value: '"5wmx2i9NmpkbXqTlBf68BCBMZ9Y"'
-- name: NEXT_PUBLIC_USE_FIREBASE_EMULATORS
-  value: 'false'
-- name: NEXT_PUBLIC_APP_URL
-  value: http://localhost:9002
+  - name: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: AIzaSyAkl7Dtii1jap9DwpVg-ObTkcJMqdFbLdM
+  - name: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: sanhome-e392d.firebaseapp.com
+  - name: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: sanhome-e392d
+  - name: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: sanhome-e392d.appspot.com
+  - name: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "677679364149"
+  - name: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: 1:677679364149:web:73812d8ca059214338997c
+  - name: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    value: G-JBG8TDGVVQ
+  - name: EMAIL_USER
+    value: nourhb58@gmail.com
+  - name: EMAIL_PASS
+    value: kpxs lxdl vcqz yyha
+  - name: CLOUDINARY_CLOUD_NAME
+    value: '"dbknnbsua"'
+  - name: CLOUDINARY_API_KEY
+    value: '"631469974713699"'
+  - name: CLOUDINARY_API_SECRET
+    value: '"5wmx2i9NmpkbXqTlBf68BCBMZ9Y"'
+  - name: NEXT_PUBLIC_USE_FIREBASE_EMULATORS
+    value: "false"
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://localhost:9002
+  - name: APP_BASE_URL
+    value: http://sanhome.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://sanhome.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://sanhome.192.168.56.129.nip.io:30659
 ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: sanhome.192.168.56.129.nip.io
+    - host: sanhome.192.168.56.129.nip.io
   tls: []
 deploymentStrategy: Rolling
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    failureThreshold: 6
