@@ -1,10 +1,10 @@
 image:
   repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
-  tag: '387'
-  digest: ''
+  tag: "394"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
   targetPort: 8000
 resources:
@@ -14,11 +14,28 @@ resources:
   requests:
     cpu: 25m
     memory: 64Mi
-env: []
+env:
+  - name: APP_BASE_URL
+    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
 deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: docker-demo-with-simple-python-app.192.168.56.129.nip.io
+    - host: docker-demo-with-simple-python-app.192.168.56.129.nip.io
   tls: []
+probes:
+  readiness:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    failureThreshold: 12
+  liveness:
+    initialDelaySeconds: 90
+    periodSeconds: 20
+    failureThreshold: 6
