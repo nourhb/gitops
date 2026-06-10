@@ -1,15 +1,15 @@
 image:
   repository: 192.168.56.129:30002/paas/simple-app
-  tag: '324'
-  digest: ''
+  tag: "460"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: simple-app.192.168.56.129.nip.io
+    - host: simple-app.192.168.56.129.nip.io
   tls: []
 resources:
   limits:
@@ -18,7 +18,24 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-env: []
+env:
+  - name: APP_BASE_URL
+    value: http://simple-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://simple-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://simple-app.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://simple-app.192.168.56.129.nip.io:30659
 service:
   targetPort: 3000
 deploymentStrategy: Rolling
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    failureThreshold: 6
