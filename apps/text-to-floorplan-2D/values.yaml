@@ -15,3 +15,4 @@ ingress:
   hosts:
   - host: text-to-floorplan-2d.192.168.56.129.nip.io
   tls: []
+deploymentStrategy: Rolling

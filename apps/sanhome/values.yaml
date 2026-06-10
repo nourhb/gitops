@@ -51,15 +51,4 @@ ingress:
   hosts:
   - host: sanhome.192.168.56.129.nip.io
   tls: []
-deploymentStrategy: BlueGreen
-activeSlot: green
-blue:
-  image:
-    repository: 192.168.56.129:30002/paas/sanhome
-    tag: '332'
-    digest: ''
-green:
-  image:
-    repository: 192.168.56.129:30002/paas/sanhome
-    tag: '332'
-    digest: ''
+deploymentStrategy: Rolling

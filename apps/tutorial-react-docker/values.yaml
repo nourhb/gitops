@@ -1,17 +1,17 @@
 image:
   repository: 192.168.56.129:30002/paas/tutorial-react-docker
-  tag: "239"
+  tag: '239'
   pullPolicy: IfNotPresent
-  digest: ""
+  digest: ''
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: tutorial-react-docker.192.168.56.129.nip.io
+  - host: tutorial-react-docker.192.168.56.129.nip.io
   tls: []
 resources:
   limits:
@@ -21,3 +21,4 @@ resources:
     cpu: 100m
     memory: 256Mi
 env: []
+deploymentStrategy: Rolling

@@ -1,10 +1,10 @@
 image:
   repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
-  tag: "279"
-  digest: ""
+  tag: '279'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 resources:
@@ -19,17 +19,6 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: text-to-floorplan-2d.192.168.56.129.nip.io
+  - host: text-to-floorplan-2d.192.168.56.129.nip.io
   tls: []
-deploymentStrategy: BlueGreen
-blue:
-  image:
-    repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
-    tag: "279"
-    digest: ""
-green:
-  image:
-    repository: 192.168.56.129:30002/paas/text-to-floorplan-2d
-    tag: "337"
-    digest: ""
-activeSlot: blue
+deploymentStrategy: Rolling

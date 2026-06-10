@@ -19,3 +19,6 @@ ingress:
   hosts:
   - host: sample-app.192.168.56.129.nip.io
   tls: []
+deploymentStrategy: Rolling
+service:
+  targetPort: 3000

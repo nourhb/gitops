@@ -1,10 +1,10 @@
 image:
   repository: 192.168.56.129:30002/paas/dockerized-nextjs
-  tag: "241"
+  tag: '241'
   pullPolicy: IfNotPresent
-  digest: ""
+  digest: ''
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 resources:
@@ -19,5 +19,6 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: dockerized-nextjs.192.168.56.129.nip.io
+  - host: dockerized-nextjs.192.168.56.129.nip.io
   tls: []
+deploymentStrategy: Rolling

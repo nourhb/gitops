@@ -1,15 +1,15 @@
 image:
   repository: 192.168.56.129:30002/paas/simple-app
-  tag: "324"
-  digest: ""
+  tag: '324'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: simple-app.192.168.56.129.nip.io
+  - host: simple-app.192.168.56.129.nip.io
   tls: []
 resources:
   limits:
@@ -21,15 +21,4 @@ resources:
 env: []
 service:
   targetPort: 3000
-deploymentStrategy: BlueGreen
-blue:
-  image:
-    repository: 192.168.56.129:30002/paas/simple-app
-    tag: "353"
-    digest: ""
-green:
-  image:
-    repository: 192.168.56.129:30002/paas/simple-app
-    tag: "324"
-    digest: ""
-activeSlot: green
+deploymentStrategy: Rolling

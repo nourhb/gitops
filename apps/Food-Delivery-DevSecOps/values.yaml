@@ -9,3 +9,6 @@ ingress:
   tls: []
 imagePullSecrets:
 - name: harbor-regcred
+deploymentStrategy: Rolling
+service:
+  targetPort: 3000
