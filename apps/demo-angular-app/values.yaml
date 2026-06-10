@@ -1,10 +1,10 @@
 image:
   repository: 192.168.56.129:30002/paas/demo-angular-app
-  tag: "389"
-  digest: ""
+  tag: '389'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 80
 resources:
@@ -20,5 +20,5 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: demo-angular-app.192.168.56.129.nip.io
+  - host: demo-angular-app.192.168.56.129.nip.io
   tls: []
