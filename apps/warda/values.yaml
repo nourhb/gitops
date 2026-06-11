@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/warda
-  tag: "574"
+  tag: "578"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
