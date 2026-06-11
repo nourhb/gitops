@@ -1,12 +1,12 @@
 image:
   repository: 192.168.56.129:30002/paas/warda
-  tag: '333'
-  digest: ''
+  tag: "557"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
-  targetPort: 3000
+  targetPort: 80
 resources:
   limits:
     cpu: 500m
@@ -14,11 +14,29 @@ resources:
   requests:
     cpu: 100m
     memory: 256Mi
-env: []
+env:
+  - name: APP_BASE_URL
+    value: http://warda.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://warda.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://warda.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://warda.192.168.56.129.nip.io:30659
 deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: warda.192.168.56.129.nip.io
+    - host: warda.192.168.56.129.nip.io
   tls: []
+probes:
+  type: tcp
+  readiness:
+    initialDelaySeconds: 3
+    periodSeconds: 5
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 10
+    periodSeconds: 15
+    failureThreshold: 6
