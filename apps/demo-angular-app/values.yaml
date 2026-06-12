@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/demo-angular-app
-  tag: "399"
+  tag: "600"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
