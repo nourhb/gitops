@@ -1,7 +1,8 @@
 image:
-  repository: harbor.example.com/library/test-app
-  tag: ''
-  digest: sha256:replace-with-real-image-digest
+  repository: 192.168.56.129:30002/paas/test-app
+  tag: "635"
+  digest: ""
+  pullPolicy: IfNotPresent
 resources:
   limits:
     cpu: 500m
@@ -9,15 +10,32 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-env: []
+env:
+  - name: APP_BASE_URL
+    value: http://test-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://test-app.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://test-app.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://test-app.192.168.56.129.nip.io:30659
 ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: test-app.192.168.56.129.nip.io
+    - host: test-app.192.168.56.129.nip.io
   tls: []
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 deploymentStrategy: Rolling
 service:
   targetPort: 3000
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    failureThreshold: 6
