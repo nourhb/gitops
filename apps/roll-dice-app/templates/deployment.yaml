@@ -1,0 +1,91 @@
+{{- if ne (.Values.deploymentStrategy | default "Rolling") "BlueGreen" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "roll dice app.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "roll dice app.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "roll dice app.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "roll dice app.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        runAsNonRoot: false
+      containers:
+        - name: {{ include "roll dice app.name" . }}
+          image: "{{ .Values.image.repository }}{{- if .Values.image.digest }}@{{ .Values.image.digest }}{{- else if .Values.image.tag }}:{{ .Values.image.tag }}{{- end }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          securityContext:
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            allowPrivilegeEscalation: false
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort | default 3000 }}
+              protocol: TCP
+          env:
+            - name: HOSTNAME
+              value: "0.0.0.0"
+            - name: PORT
+              value: {{ .Values.service.targetPort | default 3000 | quote }}
+            {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+          {{- $probes := .Values.probes | default dict }}
+          {{- $readiness := $probes.readiness | default dict }}
+          {{- $liveness := $probes.liveness | default dict }}
+          readinessProbe:
+            {{- if eq (default "http" $probes.type) "tcp" }}
+            tcpSocket:
+              port: http
+            {{- else }}
+            httpGet:
+              path: {{ default "/" $readiness.path }}
+              port: http
+            {{- end }}
+            initialDelaySeconds: {{ default 5 $readiness.initialDelaySeconds }}
+            periodSeconds: {{ default 10 $readiness.periodSeconds }}
+            failureThreshold: {{ default 3 $readiness.failureThreshold }}
+          livenessProbe:
+            {{- if eq (default "http" $probes.type) "tcp" }}
+            tcpSocket:
+              port: http
+            {{- else }}
+            httpGet:
+              path: {{ default "/" $liveness.path }}
+              port: http
+            {{- end }}
+            initialDelaySeconds: {{ default 15 $liveness.initialDelaySeconds }}
+            periodSeconds: {{ default 20 $liveness.periodSeconds }}
+            failureThreshold: {{ default 3 $liveness.failureThreshold }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- else }}
+          resources:
+            limits:
+              cpu: "300m"
+              memory: "384Mi"
+            requests:
+              cpu: "50m"
+              memory: "128Mi"
+          {{- end }}
+{{- end }}
