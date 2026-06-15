@@ -1,6 +1,6 @@
 image:
   repository: 192.168.56.129:30002/paas/roll-dice-app
-  tag: "641"
+  tag: "643"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
