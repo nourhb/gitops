@@ -1,8 +1,8 @@
-{{- define "roll dice app.name" -}}
+{{- define "roll-dice-app.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "roll dice app.fullname" -}}
+{{- define "roll-dice-app.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}

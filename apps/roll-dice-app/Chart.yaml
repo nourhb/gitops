@@ -1,6 +1,6 @@
 apiVersion: v2
-name: roll dice app
-description: roll dice app workload (PaaS / Jenkins deploy)
+name: roll-dice-app
+description: roll-dice-app workload (PaaS / Jenkins deploy)
 type: application
 version: 0.1.0
 appVersion: "1.0.0"

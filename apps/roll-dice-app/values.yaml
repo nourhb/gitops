@@ -1,12 +1,22 @@
+nameOverride: roll-dice-app
+fullnameOverride: paas-roll-dice-app
+deploymentStrategy: Rolling
 image:
-  repository: 192.168.56.129:30002/paas/roll-dice-app
-  tag: "655"
-  digest: ""
+  repository: harbor.192.168.56.129.nip.io:30002/paas/roll-dice-app
+  tag: '655'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 25m
+    memory: 64Mi
 probes:
   readiness:
     initialDelaySeconds: 5
@@ -16,26 +26,9 @@ probes:
     initialDelaySeconds: 15
     periodSeconds: 20
     failureThreshold: 6
-resources:
-  limits:
-    cpu: 300m
-    memory: 384Mi
-  requests:
-    cpu: 50m
-    memory: 128Mi
-env:
-  - name: APP_BASE_URL
-    value: http://roll-dice-app.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_APP_URL
-    value: http://roll-dice-app.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_SITE_URL
-    value: http://roll-dice-app.192.168.56.129.nip.io:30659
-  - name: PUBLIC_URL
-    value: http://roll-dice-app.192.168.56.129.nip.io:30659
-deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: roll-dice-app.192.168.56.129.nip.io
+  - host: roll-dice-app.192.168.56.129.nip.io
   tls: []

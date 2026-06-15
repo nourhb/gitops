@@ -5,22 +5,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "roll dice app.fullname" $root }}-{{ $slot }}
+  name: {{ include "roll-dice-app.fullname" $root }}-{{ $slot }}
   labels:
-    app.kubernetes.io/name: {{ include "roll dice app.name" $root }}
+    app.kubernetes.io/name: {{ include "roll-dice-app.name" $root }}
     app.kubernetes.io/instance: {{ $root.Release.Name }}
     paas.io/slot: {{ $slot }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "roll dice app.name" $root }}
+      app.kubernetes.io/name: {{ include "roll-dice-app.name" $root }}
       app.kubernetes.io/instance: {{ $root.Release.Name }}
       paas.io/slot: {{ $slot }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "roll dice app.name" $root }}
+        app.kubernetes.io/name: {{ include "roll-dice-app.name" $root }}
         app.kubernetes.io/instance: {{ $root.Release.Name }}
         paas.io/slot: {{ $slot }}
     spec:
@@ -33,9 +33,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        runAsNonRoot: false
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
       containers:
-        - name: {{ include "roll dice app.name" $root }}
+        - name: {{ include "roll-dice-app.name" $root }}
           {{- $slotImg := index $root.Values $slot | default dict }}
           {{- $slotImage := $slotImg.image | default dict }}
           {{- $repo := $slotImage.repository | default $root.Values.image.repository }}
@@ -43,7 +45,7 @@ spec:
           imagePullPolicy: {{ $root.Values.image.pullPolicy | default "IfNotPresent" }}
           securityContext:
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsNonRoot: true
             allowPrivilegeEscalation: false
           ports:
             - name: http
