@@ -1,6 +1,6 @@
 image:
-  repository: 192.168.56.129:30002/paas/warda
-  tag: "673"
+  repository: harbor.192.168.56.129.nip.io:30002/paas/warda
+  tag: "695"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -40,3 +40,5 @@ probes:
     initialDelaySeconds: 10
     periodSeconds: 15
     failureThreshold: 6
+nameOverride: warda
+fullnameOverride: paas-warda
