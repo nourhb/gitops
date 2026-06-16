@@ -2,8 +2,8 @@ nameOverride: roll-dice-app
 fullnameOverride: paas-roll-dice-app
 deploymentStrategy: Rolling
 image:
-  repository: harbor.192.168.56.129.nip.io:30002/paas/roll-dice-app
-  tag: '726'
+  repository: 192.168.56.129:30002/paas/roll-dice-app
+  tag: '728'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
