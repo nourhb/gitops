@@ -3,11 +3,11 @@ fullnameOverride: paas-roll-dice-app
 deploymentStrategy: Rolling
 image:
   repository: 192.168.56.129:30002/paas/roll-dice-app
-  tag: '730'
-  digest: ''
+  tag: "783"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
   targetPort: 3000
 resources:
@@ -30,5 +30,14 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: roll-dice-app.192.168.56.129.nip.io
+    - host: roll-dice-app.192.168.56.129.nip.io
   tls: []
+env:
+  - name: APP_BASE_URL
+    value: https://roll-dice-app.apps.local
+  - name: NEXT_PUBLIC_APP_URL
+    value: https://roll-dice-app.apps.local
+  - name: NEXT_PUBLIC_SITE_URL
+    value: https://roll-dice-app.apps.local
+  - name: PUBLIC_URL
+    value: https://roll-dice-app.apps.local
