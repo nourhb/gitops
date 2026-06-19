@@ -3,7 +3,7 @@ fullnameOverride: paas-roll-dice-app
 deploymentStrategy: Rolling
 image:
   repository: 192.168.56.129:30002/paas/roll-dice-app
-  tag: "783"
+  tag: "791"
   digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
