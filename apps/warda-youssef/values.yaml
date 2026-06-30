@@ -2,14 +2,14 @@ nameOverride: warda-youssef
 fullnameOverride: paas-warda-youssef
 deploymentStrategy: Rolling
 image:
-  repository: harbor.192.168.56.129.nip.io:30002/paas/warda-youssef
+  repository: 192.168.56.129:30002/paas/warda-youssef
   tag: '78'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: harbor-regcred
 service:
-  targetPort: 3000
+  targetPort: 80
 resources:
   limits:
     cpu: 200m
@@ -18,13 +18,14 @@ resources:
     cpu: 25m
     memory: 64Mi
 probes:
+  type: tcp
   readiness:
-    initialDelaySeconds: 5
-    periodSeconds: 10
+    initialDelaySeconds: 3
+    periodSeconds: 5
     failureThreshold: 6
   liveness:
-    initialDelaySeconds: 15
-    periodSeconds: 20
+    initialDelaySeconds: 10
+    periodSeconds: 15
     failureThreshold: 6
 ingress:
   enabled: true
