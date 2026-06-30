@@ -41,3 +41,5 @@ probes:
     failureThreshold: 6
 nameOverride: simple-app
 fullnameOverride: paas-simple-app
+nodeSelector:
+  kubernetes.io/hostname: master
