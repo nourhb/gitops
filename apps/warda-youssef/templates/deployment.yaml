@@ -40,13 +40,13 @@ spec:
             allowPrivilegeEscalation: false
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort | default 80 }}
+              containerPort: {{ .Values.service.targetPort | default 3000 }}
               protocol: TCP
           env:
             - name: HOSTNAME
               value: "0.0.0.0"
             - name: PORT
-              value: {{ .Values.service.targetPort | default 80 | quote }}
+              value: {{ .Values.service.targetPort | default 3000 | quote }}
             {{- range .Values.env }}
             - name: {{ .name }}
               value: {{ .value | quote }}
