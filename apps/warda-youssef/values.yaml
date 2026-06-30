@@ -1,6 +1,6 @@
 image:
-  repository: 192.168.56.129:30002/paas/warda-youssef
-  tag: "66"
+  repository: harbor.192.168.56.129.nip.io:30002/paas/warda-youssef
+  tag: "78"
   digest: ""
   pullPolicy: IfNotPresent
 nameOverride: warda-youssef
