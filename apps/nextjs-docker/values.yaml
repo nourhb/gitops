@@ -1,12 +1,12 @@
 image:
-  repository: harbor.192.168.56.129.nip.io:30002/paas/nextjs-docker
-  tag: "83"
-  digest: ""
+  repository: 192.168.56.129:30002/paas/nextjs-docker
+  tag: '83'
+  digest: ''
   pullPolicy: IfNotPresent
 nameOverride: nextjs-docker
 fullnameOverride: paas-nextjs-docker
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 probes:
@@ -20,24 +20,26 @@ probes:
     failureThreshold: 6
 resources:
   limits:
-    cpu: 300m
-    memory: 384Mi
+    cpu: 200m
+    memory: 256Mi
   requests:
-    cpu: 50m
-    memory: 128Mi
+    cpu: 25m
+    memory: 64Mi
 env:
-  - name: APP_BASE_URL
-    value: http://nextjs-docker.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_APP_URL
-    value: http://nextjs-docker.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_SITE_URL
-    value: http://nextjs-docker.192.168.56.129.nip.io:30659
-  - name: PUBLIC_URL
-    value: http://nextjs-docker.192.168.56.129.nip.io:30659
+- name: APP_BASE_URL
+  value: http://nextjs-docker.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_APP_URL
+  value: http://nextjs-docker.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_SITE_URL
+  value: http://nextjs-docker.192.168.56.129.nip.io:30659
+- name: PUBLIC_URL
+  value: http://nextjs-docker.192.168.56.129.nip.io:30659
 deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: nextjs-docker.192.168.56.129.nip.io
+  - host: nextjs-docker.192.168.56.129.nip.io
   tls: []
+nodeSelector:
+  kubernetes.io/hostname: master
