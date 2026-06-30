@@ -1,34 +1,34 @@
 image:
   repository: 192.168.56.129:30002/paas/profit-margin-sponsoring-facebook
-  tag: "625"
-  digest: ""
+  tag: '59'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 3000
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: profit-margin-sponsoring-facebook.192.168.56.129.nip.io
+  - host: profit-margin-sponsoring-facebook.192.168.56.129.nip.io
   tls: []
 resources:
   limits:
-    cpu: 500m
-    memory: 768Mi
-  requests:
-    cpu: 100m
+    cpu: 200m
     memory: 256Mi
+  requests:
+    cpu: 25m
+    memory: 64Mi
 env:
-  - name: APP_BASE_URL
-    value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_APP_URL
-    value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_SITE_URL
-    value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
-  - name: PUBLIC_URL
-    value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
+- name: APP_BASE_URL
+  value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_APP_URL
+  value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_SITE_URL
+  value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
+- name: PUBLIC_URL
+  value: http://profit-margin-sponsoring-facebook.192.168.56.129.nip.io:30659
 deploymentStrategy: Rolling
 probes:
   readiness:
@@ -39,3 +39,7 @@ probes:
     initialDelaySeconds: 15
     periodSeconds: 20
     failureThreshold: 6
+nameOverride: profit-margin-sponsoring-facebook
+fullnameOverride: paas-profit-margin-sponsoring-facebook
+nodeSelector:
+  kubernetes.io/hostname: master
