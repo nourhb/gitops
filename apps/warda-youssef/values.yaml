@@ -3,7 +3,7 @@ fullnameOverride: paas-warda-youssef
 deploymentStrategy: Rolling
 image:
   repository: 192.168.56.129:30002/paas/warda-youssef
-  tag: '87'
+  tag: '78'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
