@@ -1,10 +1,10 @@
 image:
-  repository: harbor.192.168.56.129.nip.io:30002/paas/docker-demo-with-simple-python-app
-  tag: "125"
-  digest: ""
+  repository: 192.168.56.129:30002/paas/docker-demo-with-simple-python-app
+  tag: '125'
+  digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
   targetPort: 8000
 resources:
@@ -15,20 +15,20 @@ resources:
     cpu: 25m
     memory: 64Mi
 env:
-  - name: APP_BASE_URL
-    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_APP_URL
-    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_SITE_URL
-    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
-  - name: PUBLIC_URL
-    value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+- name: APP_BASE_URL
+  value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_APP_URL
+  value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+- name: NEXT_PUBLIC_SITE_URL
+  value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
+- name: PUBLIC_URL
+  value: http://docker-demo-with-simple-python-app.192.168.56.129.nip.io:30659
 deploymentStrategy: Rolling
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: docker-demo-with-simple-python-app.192.168.56.129.nip.io
+  - host: docker-demo-with-simple-python-app.192.168.56.129.nip.io
   tls: []
 probes:
   readiness:
@@ -41,3 +41,5 @@ probes:
     failureThreshold: 6
 nameOverride: docker-demo-with-simple-python-app
 fullnameOverride: paas-docker-demo-with-simple-python-app
+nodeSelector:
+  kubernetes.io/hostname: master
