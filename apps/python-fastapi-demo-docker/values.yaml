@@ -2,14 +2,14 @@ nameOverride: python-fastapi-demo-docker
 fullnameOverride: paas-python-fastapi-demo-docker
 deploymentStrategy: Rolling
 image:
-  repository: harbor.192.168.56.129.nip.io:30002/paas/python-fastapi-demo-docker
+  repository: 192.168.56.129:30002/paas/python-fastapi-demo-docker
   tag: '264'
   digest: ''
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: harbor-regcred
 service:
-  targetPort: 3000
+  targetPort: 8000
 resources:
   limits:
     cpu: 200m
@@ -19,11 +19,11 @@ resources:
     memory: 64Mi
 probes:
   readiness:
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     periodSeconds: 10
-    failureThreshold: 6
+    failureThreshold: 12
   liveness:
-    initialDelaySeconds: 15
+    initialDelaySeconds: 90
     periodSeconds: 20
     failureThreshold: 6
 ingress:
@@ -32,3 +32,5 @@ ingress:
   hosts:
   - host: python-fastapi-demo-docker.192.168.56.129.nip.io
   tls: []
+nodeSelector:
+  kubernetes.io/hostname: master
