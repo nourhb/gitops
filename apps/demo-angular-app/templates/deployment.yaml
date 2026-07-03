@@ -1,4 +1,5 @@
 {{- if ne (.Values.deploymentStrategy | default "Rolling") "BlueGreen" }}
+{{- $staticNginx := include "demo-angular-app.staticNginx" . | eq "true" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,50 +28,82 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        runAsNonRoot: false
+        runAsNonRoot: true
+        runAsUser: {{ if $staticNginx }}101{{ else }}1000{{ end }}
+        fsGroup: {{ if $staticNginx }}101{{ else }}1000{{ end }}
+      {{- if $staticNginx }}
+      volumes:
+        {{- include "demo-angular-app.nginxVolumes" . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ include "demo-angular-app.name" . }}
           image: "{{ .Values.image.repository }}{{- if .Values.image.digest }}@{{ .Values.image.digest }}{{- else if .Values.image.tag }}:{{ .Values.image.tag }}{{- end }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          {{- if $staticNginx }}
+          command: ["nginx"]
+          args: ["-g", "daemon off;"]
+          {{- end }}
           securityContext:
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsNonRoot: true
+            {{- if $staticNginx }}
+            runAsUser: 101
+            {{- end }}
             allowPrivilegeEscalation: false
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort | default 3000 }}
+              containerPort: {{ .Values.service.targetPort | default 8080 }}
               protocol: TCP
+          {{- if $staticNginx }}
+          volumeMounts:
+            {{- include "demo-angular-app.nginxVolumeMounts" . | nindent 12 }}
+          {{- end }}
           env:
             - name: HOSTNAME
               value: "0.0.0.0"
             - name: PORT
-              value: {{ .Values.service.targetPort | default 3000 | quote }}
+              value: {{ .Values.service.targetPort | default 8080 | quote }}
             {{- range .Values.env }}
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
+          {{- $probes := .Values.probes | default dict }}
+          {{- $readiness := $probes.readiness | default dict }}
+          {{- $liveness := $probes.liveness | default dict }}
           readinessProbe:
-            httpGet:
-              path: /
+            {{- if or (eq (default "http" $probes.type) "tcp") $staticNginx }}
+            tcpSocket:
               port: http
-            initialDelaySeconds: 5
-            periodSeconds: 10
+            {{- else }}
+            httpGet:
+              path: {{ default "/" $readiness.path }}
+              port: http
+            {{- end }}
+            initialDelaySeconds: {{ default 5 $readiness.initialDelaySeconds }}
+            periodSeconds: {{ default 10 $readiness.periodSeconds }}
+            failureThreshold: {{ default 3 $readiness.failureThreshold }}
           livenessProbe:
-            httpGet:
-              path: /
+            {{- if or (eq (default "http" $probes.type) "tcp") $staticNginx }}
+            tcpSocket:
               port: http
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            {{- else }}
+            httpGet:
+              path: {{ default "/" $liveness.path }}
+              port: http
+            {{- end }}
+            initialDelaySeconds: {{ default 15 $liveness.initialDelaySeconds }}
+            periodSeconds: {{ default 20 $liveness.periodSeconds }}
+            failureThreshold: {{ default 3 $liveness.failureThreshold }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- else }}
           resources:
             limits:
-              cpu: "500m"
-              memory: "768Mi"
+              cpu: "300m"
+              memory: "384Mi"
             requests:
-              cpu: "100m"
-              memory: "256Mi"
+              cpu: "50m"
+              memory: "128Mi"
           {{- end }}
 {{- end }}
