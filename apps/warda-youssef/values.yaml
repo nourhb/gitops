@@ -2,12 +2,12 @@ nameOverride: warda-youssef
 fullnameOverride: paas-warda-youssef
 deploymentStrategy: Rolling
 image:
-  repository: 192.168.56.129:30002/paas/warda-youssef
-  tag: '78'
-  digest: ''
+  repository: harbor.192.168.56.129.nip.io:30002/paas/warda-youssef
+  tag: "266"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
   targetPort: 80
 resources:
@@ -31,16 +31,14 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: warda-youssef.192.168.56.129.nip.io
+    - host: warda-youssef.192.168.56.129.nip.io
   tls: []
 env:
-- name: APP_BASE_URL
-  value: http://warda-youssef.192.168.56.129.nip.io:30659
-- name: NEXT_PUBLIC_APP_URL
-  value: http://warda-youssef.192.168.56.129.nip.io:30659
-- name: NEXT_PUBLIC_SITE_URL
-  value: http://warda-youssef.192.168.56.129.nip.io:30659
-- name: PUBLIC_URL
-  value: http://warda-youssef.192.168.56.129.nip.io:30659
-nodeSelector:
-  kubernetes.io/hostname: master
+  - name: APP_BASE_URL
+    value: http://warda-youssef.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://warda-youssef.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://warda-youssef.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://warda-youssef.192.168.56.129.nip.io:30659
