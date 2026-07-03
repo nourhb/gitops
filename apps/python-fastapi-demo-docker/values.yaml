@@ -1,43 +1,34 @@
-image:
-  repository: 192.168.56.129:30002/paas/python-fastapi-demo-docker
-  tag: "264"
-  digest: ""
-  pullPolicy: IfNotPresent
 nameOverride: python-fastapi-demo-docker
 fullnameOverride: paas-python-fastapi-demo-docker
+deploymentStrategy: Rolling
+image:
+  repository: harbor.192.168.56.129.nip.io:30002/paas/python-fastapi-demo-docker
+  tag: '264'
+  digest: ''
+  pullPolicy: IfNotPresent
 imagePullSecrets:
-  - name: harbor-regcred
+- name: harbor-regcred
 service:
-  targetPort: 8000
-probes:
-  readiness:
-    initialDelaySeconds: 30
-    periodSeconds: 10
-    failureThreshold: 12
-  liveness:
-    initialDelaySeconds: 90
-    periodSeconds: 20
-    failureThreshold: 6
+  targetPort: 3000
 resources:
   limits:
-    cpu: 300m
-    memory: 384Mi
+    cpu: 200m
+    memory: 256Mi
   requests:
-    cpu: 50m
-    memory: 128Mi
-env:
-  - name: APP_BASE_URL
-    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_APP_URL
-    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
-  - name: NEXT_PUBLIC_SITE_URL
-    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
-  - name: PUBLIC_URL
-    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
-deploymentStrategy: Rolling
+    cpu: 25m
+    memory: 64Mi
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    failureThreshold: 6
 ingress:
   enabled: true
   className: traefik
   hosts:
-    - host: python-fastapi-demo-docker.192.168.56.129.nip.io
+  - host: python-fastapi-demo-docker.192.168.56.129.nip.io
   tls: []
