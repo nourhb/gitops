@@ -1,6 +1,6 @@
 image:
-  repository: 192.168.56.129:30002/paas/test-app
-  tag: "635"
+  repository: harbor.192.168.56.129.nip.io:30002/paas/test-app
+  tag: "262"
   digest: ""
   pullPolicy: IfNotPresent
 resources:
@@ -39,3 +39,5 @@ probes:
     initialDelaySeconds: 15
     periodSeconds: 20
     failureThreshold: 6
+nameOverride: test-app
+fullnameOverride: paas-test-app
