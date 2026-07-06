@@ -2,12 +2,12 @@ nameOverride: python-fastapi-demo-docker
 fullnameOverride: paas-python-fastapi-demo-docker
 deploymentStrategy: Rolling
 image:
-  repository: 192.168.56.129:30002/paas/python-fastapi-demo-docker
-  tag: '264'
-  digest: ''
+  repository: harbor.192.168.56.129.nip.io:30002/paas/python-fastapi-demo-docker
+  tag: "277"
+  digest: ""
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: harbor-regcred
+  - name: harbor-regcred
 service:
   targetPort: 8000
 resources:
@@ -30,7 +30,14 @@ ingress:
   enabled: true
   className: traefik
   hosts:
-  - host: python-fastapi-demo-docker.192.168.56.129.nip.io
+    - host: python-fastapi-demo-docker.192.168.56.129.nip.io
   tls: []
-nodeSelector:
-  kubernetes.io/hostname: master
+env:
+  - name: APP_BASE_URL
+    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_APP_URL
+    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
+  - name: NEXT_PUBLIC_SITE_URL
+    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
+  - name: PUBLIC_URL
+    value: http://python-fastapi-demo-docker.192.168.56.129.nip.io:30659
